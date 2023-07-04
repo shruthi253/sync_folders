@@ -1,0 +1,11 @@
+# Config file
+
+[project]
+name = "sync_folders"
+version = "1.0.0"
+description = "Application to sync source and replica folders"
+readme = "README.md"
+
+
+[project.scripts]
+sync_folders = "sync_folders.__main__:main"
