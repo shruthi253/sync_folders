@@ -7,9 +7,4 @@ def cli_arguments(argv=None):
     parser.add_argument("replica_path", help="Path to the replica folder")
     parser.add_argument("sync_interval", type=int, help="Synchronization interval in seconds", default=10)
     parser.add_argument("log_file_path", help="Path to the logfile")
-    return parser.parse_args(argv)
-   
-
-    
-    
-
+    return parser.parse_args(argv)  

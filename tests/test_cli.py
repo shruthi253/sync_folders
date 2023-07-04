@@ -1,18 +1,17 @@
-from sync_folders import cli
+from sync_folders.cli import cli_arguments
 
-def test_cli_arguments():
 
+def test_cli_arguments(tmpdir):
     # Simulating command-line arguments
-    print("entered here")
-    args = ["C:\\Users\\shrut\\source\\repos\\Main", "E:\\Main_Backup", "10", "log.txt"]
-   
+    source_folder = str(tmpdir.join("source"))
+    replica_folder = str(tmpdir.join("replica"))
+    args = [source_folder, replica_folder, "10", "log.txt"]   
 
     # Calling the function with the simulated arguments
-    parsed_args = cli.cli_arguments(args)
+    parsed_args = cli_arguments(args)
 
     # Asserting the expected values
-    assert parsed_args.source_path == "C:\\Users\\shrut\\source\\repos\\Main"
-    assert parsed_args.replica_path == "E:\\Main_Backup"
+    assert parsed_args.source_path == source_folder
+    assert parsed_args.replica_path == replica_folder
     assert parsed_args.sync_interval == 10
     assert parsed_args.log_file_path == "log.txt"
-

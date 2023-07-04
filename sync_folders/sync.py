@@ -5,7 +5,6 @@ import time
 
 
 def synchronize(source_path, replica_path, log_file_path):
-
     # Create the log file
     with open(log_file_path, 'a') as log_file:
         log_file.write(f'Started synchronization at: {time.ctime()}\n')
@@ -33,7 +32,6 @@ def synchronize(source_path, replica_path, log_file_path):
                 #copies file including its metadata
                 shutil.copy2(source_file_path, replica_file_path)         
                 log_operation(log_file_path, f'Copied file: {replica_file_path}')  
-        print('first set over')
     
     # Walk through Replica for files and folders
     for root, dirs, files in os.walk(replica_path):
@@ -67,7 +65,6 @@ def log_operation(log_file_path, message):
     print(message)
 
 def are_files_identical(file1, file2):
-
     # Buffer size to avoid out of memory issues
     BLOCK_SIZE = 65536   #64 kilobytes
 
