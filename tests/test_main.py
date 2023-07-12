@@ -1,6 +1,4 @@
 from main import check_same_path,source_path_exists,create_replica
-from sync_folders import cli
-from unittest.mock import patch
 import pytest
 import os
 
@@ -22,7 +20,7 @@ def test_check_same_path(capsys, tmpdir):
     assert exc_info.value.code == 1
 
 
-def test_source_path_exists(capsys, tmpdir):
+def test_source_path_exists(capsys):
     # Prepare test case data
     source_path = str("")
 
@@ -36,7 +34,6 @@ def test_source_path_exists(capsys, tmpdir):
     assert out == ""
     assert exc_info.type == SystemExit
     assert exc_info.value.code == 1
-
 
 
 def test_create_replica(tmpdir):

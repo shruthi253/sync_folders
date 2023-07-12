@@ -44,3 +44,37 @@ def test_synchronize(tmpdir):
     assert content1 == "This is file 1"
     assert content2 == "This is file 2"    
 
+def test_remove_files_from_replica(tmpdir):
+
+    source_path = str(tmpdir.join("source"))
+    replica_path = str(tmpdir.join("replica"))
+
+    os.makedirs(os.path.join(source_path, "dir1"))
+    with open(os.path.join(source_path,"file1"), "w") as f:
+        f.write("This belongs to source")
+
+    os.makedirs(os.path.join(replica_path,"dir3"))
+    with open(os.path.join(replica_path,"file3"), "w") as f:
+        f.write("This should be removed from replica")
+
+    # Call the synchronize function
+    synchronize(source_path, replica_path, "test_log.txt")
+
+    assert not os.path.isdir(os.path.join(replica_path,"dir3"))
+    assert not os.path.exists(os.path.join(replica_path,"file3"))
+
+def test_sync_one_way(tmpdir):
+
+    source_path = str(tmpdir.join("source"))
+    replica_path = str(tmpdir.join("replica"))
+
+    os.makedirs(os.path.join(replica_path,"dir3"))
+    with open(os.path.join(replica_path,"file3"), "w") as f:
+        f.write("This should be removed from replica")
+
+    # Call the synchronize function
+    synchronize(source_path, replica_path, "test_log.txt")
+
+    # assert replica folder does not added to source
+    assert not os.path.isdir(os.path.join(source_path,"dir3"))
+    assert not os.path.exists(os.path.join(source_path,"file3"))

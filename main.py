@@ -7,7 +7,7 @@ import tomllib
 from pprint import pprint
 
 
-def sync_folders(source_path, replica_path, sync_interval, log_file_path):
+def start_folder_sync(source_path, replica_path, sync_interval, log_file_path):
     # Synchronize folders periodically
     while True:
         try:
@@ -15,7 +15,7 @@ def sync_folders(source_path, replica_path, sync_interval, log_file_path):
             time.sleep(sync_interval)
 
         except Exception as e:
-            print("Error occurred during synchronization:", str(e))
+            print("There is an error occurred during synchronization:", str(e))
             sync.log_operation(log_file_path, "Error occurred during synchronization: " + str(e))
 
 
@@ -51,7 +51,7 @@ def call_cli_arguments():
     create_replica(replica_path)
 
     # call sync function
-    sync_folders(source_path, replica_path, args.sync_interval, args.log_file_path)
+    start_folder_sync(source_path, replica_path, args.sync_interval, args.log_file_path)
 
 
 def load_toml() -> dict:    
